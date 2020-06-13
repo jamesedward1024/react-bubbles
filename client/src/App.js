@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 
 import Login from "./components/Login";
 import PrivateRoute from './components/PrivateRoute'
@@ -10,8 +10,13 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <PrivateRoute exact path="/protected" component={BubblePage} />
-        <Route exact path="/" component={Login} />
+
+        <Link path="/protected" className="nav">Bubbles</Link>
+        <Switch>
+          <PrivateRoute path="/protected" component={BubblePage} />
+          <Route path="/login" component={Login} />
+          <Route component={Login} />
+        </Switch>
       </div>
     </Router>
   );
